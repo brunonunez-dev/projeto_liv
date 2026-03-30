@@ -70,3 +70,4 @@ if query_pt:
             st.write("Nenhum livro encontrado com esse critério.")
     else:
         st.write("Nenhum livro encontrado.")
+        
