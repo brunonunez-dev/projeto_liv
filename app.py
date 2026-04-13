@@ -16,17 +16,18 @@ def translate_query(query: str) -> str:
 if query_pt:
     # Traduz a query para inglês antes de enviar
     query_en = translate_query(query_pt)
-
-    url = f"https://openlibrary.org/search.json?q={query_en}"
-    response = requests.get(url)
-    data = response.json()
+    
+    with st.spinner('Buscando livros...'):
+        url = f"https://openlibrary.org/search.json?q={query_en}"
+        response = requests.get(url)
+        data = response.json()
 
     if data["docs"]:
         # pega os 10 primeiros resultados
-
+        found = False
         for doc in data["docs"][:10]:
             cover_id = doc.get("cover_i")
-            found = False
+            
 
             # só continua se tiver capa válida
             if isinstance(cover_id, int) and cover_id > 0:
